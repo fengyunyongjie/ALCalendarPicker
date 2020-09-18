@@ -275,6 +275,8 @@ static CGFloat headerHeight = 45;
     }
     else if (result == NSOrderedAscending) {
         return YES; // Day1 在 Day2 之前
+    }else if (result == NSOrderedSame) {
+        return NO;
     }
     return YES;
 }
