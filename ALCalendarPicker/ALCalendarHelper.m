@@ -76,6 +76,15 @@
         [nextMonthDates addObject:dat];
     }
     
+    NSInteger lastDay= 7 - lastDaysWeekDay;
+    if (lastMonthDates.count+thisMonthDates.count+nextMonthDates.count<36) {
+        for (NSInteger i = lastDay+1 ; i < lastDay + 7 +1; i++) {
+            NSString *d = [NSString stringWithFormat:@"%zd",i];
+            ALCalendarDate *dat = [ALCalendarDate nextMonthDateWith:d];
+            [nextMonthDates addObject:dat];
+        }
+    }
+    
     NSMutableArray *arr = [NSMutableArray arrayWithArray:lastMonthDates];
     [arr addObjectsFromArray:thisMonthDates];
     [arr addObjectsFromArray:nextMonthDates];
