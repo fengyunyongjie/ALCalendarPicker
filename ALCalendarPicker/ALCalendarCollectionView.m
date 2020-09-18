@@ -102,18 +102,20 @@ static NSString *identifier = @"dateCell";
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([self.collectionViewDelegate respondsToSelector:@selector(calendarView:didSelectItem:date:dateString:)]) {
-        ALCalendarDate *date = self.dates[indexPath.row];
-        NSString *dateString;
-        if (date.isLastMonth) { // 上个月
-            dateString = [[ALCalendarHelper lastYearAndMonth:self.yearAndMonth] stringByAppendingFormat:@"-%02zd",date.date.integerValue];
-        } else if (date.isNextMonth) { // 下个月
-            dateString = [[ALCalendarHelper nextYearAndMonth:self.yearAndMonth] stringByAppendingFormat:@"-%02zd",date.date.integerValue];
-        } else { // 这个月
-            dateString = [self.yearAndMonth stringByAppendingFormat:@"-%02zd",date.date.integerValue];
+    if (indexPath.section==1) {
+        if ([self.collectionViewDelegate respondsToSelector:@selector(calendarView:didSelectItem:date:dateString:)]) {
+            ALCalendarDate *date = self.dates[indexPath.row];
+            NSString *dateString;
+            if (date.isLastMonth) { // 上个月
+                dateString = [[ALCalendarHelper lastYearAndMonth:self.yearAndMonth] stringByAppendingFormat:@"-%02zd",date.date.integerValue];
+            } else if (date.isNextMonth) { // 下个月
+                dateString = [[ALCalendarHelper nextYearAndMonth:self.yearAndMonth] stringByAppendingFormat:@"-%02zd",date.date.integerValue];
+            } else { // 这个月
+                dateString = [self.yearAndMonth stringByAppendingFormat:@"-%02zd",date.date.integerValue];
+            }
+            NSDate *dateObj = [ALCalendarHelper dateStringToDate:dateString format:@"yyyy-MM-dd"];
+            [self.collectionViewDelegate calendarView:self didSelectItem:date date:dateObj dateString:dateString];
         }
-        NSDate *dateObj = [ALCalendarHelper dateStringToDate:dateString format:@"yyyy-MM-dd"];
-        [self.collectionViewDelegate calendarView:self didSelectItem:date date:dateObj dateString:dateString];
     }
 }
 
