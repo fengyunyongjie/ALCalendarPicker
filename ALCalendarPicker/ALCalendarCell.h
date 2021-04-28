@@ -18,5 +18,6 @@
 @property (nonatomic, copy) NSString *weekDay;
 
 @property (nonatomic, strong, readonly) UILabel *dateLabel;
+@property (nonatomic, strong, readonly) UIView *tagView;
 
 @end

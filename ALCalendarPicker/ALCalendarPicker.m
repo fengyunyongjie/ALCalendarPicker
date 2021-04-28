@@ -78,6 +78,20 @@ static CGFloat headerHeight = 45;
     }
 }
 
+- (void)setupTagItemStyle:(void (^)(UIColor **tagColor, NSNumber **tagCornerRadius))style {
+    UIColor *tagColor;
+    NSNumber *tagCornerRadius;
+    if (style) {
+        style(&tagColor,&tagCornerRadius);
+    }
+    self.config.tagColor=tagColor;
+    self.config.tagCornerRadius=tagCornerRadius;
+    for (ALCalendarCollectionView *collectionView in self.collectionViews) {
+        collectionView.config = self.config;
+        [collectionView reloadData];
+    }
+}
+
 - (void)setupTodayItemStyle:(void(^)(UIColor **backgroundColor,NSNumber **backgroundCornerRadius,UIColor **titleColor))style
 {
     UIColor *backgroundColor;
@@ -369,6 +383,12 @@ static CGFloat headerHeight = 45;
 {
     _selectedItems = selectedItems;
     self.config.selectedDates = selectedItems;
+    [self reloadPicker];
+}
+
+- (void)setTagItems:(NSArray<NSString *> *)tagItems {
+    _tagItems=tagItems;
+    self.config.tagDates=tagItems;
     [self reloadPicker];
 }
 

@@ -56,6 +56,7 @@ static NSString *identifier = @"dateCell";
 {
     ALCalendarCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
     cell.backgroundColor = [UIColor whiteColor];
+    cell.tagView.hidden=YES;
     
     if(indexPath.section == 0) {
         cell.weekDay = self.titles[indexPath.row];
@@ -91,6 +92,14 @@ static NSString *identifier = @"dateCell";
                 cell.layer.cornerRadius  = self.config.tod_backgroundCornerRadius.floatValue;
                 cell.dateLabel.textColor = self.config.tod_textColor;
             }
+        }
+        
+        if ([self.config.tagDates containsObject:dateString]) {
+            cell.tagView.hidden=NO;
+            cell.tagView.backgroundColor = self.config.tagColor;
+            cell.tagView.layer.cornerRadius = self.config.tagCornerRadius.floatValue;
+        }else{
+            cell.tagView.hidden=YES;
         }
     }
     

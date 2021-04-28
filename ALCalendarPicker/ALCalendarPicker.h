@@ -56,6 +56,9 @@
 /** 选择日期 yyyy-MM-dd 格式 */
 @property (nonatomic, assign) NSArray<NSString *> *selectedItems;
 
+/** 标记日期 yyyy-MM-dd 格式 */
+@property (nonatomic, assign) NSArray<NSString *> *tagItems;
+
 /** 高亮日期优先 当高亮日期与当日日期的重叠的时候优先使用高亮日期的样式 */
 @property (nonatomic, assign) BOOL hightlightPriority;
 
@@ -70,6 +73,9 @@
 
 /** 选择日期的样式 */
 - (void)setupSelectedItemStyle:(void(^)(UIColor **backgroundColor,NSNumber **backgroundCornerRadius,UIColor **titleColor))style;
+
+/** 标记的日期的样式 */
+- (void)setupTagItemStyle:(void(^)(UIColor **tagColor,NSNumber **tagCornerRadius))style;
 
 /** 跳转到某个月历 只需提供日月 */
 - (void)jumpToYearMonth:(NSDate *)date;

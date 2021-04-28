@@ -52,4 +52,12 @@
 /** 圆角 */
 @property (nonatomic, strong) NSNumber *sel_backgroundCornerRadius;
 
+/** 标记日期 */
+@property (nonatomic, strong) NSArray<NSString *> *tagDates;
+
+@property (nonatomic, strong) UIColor *tagColor;
+
+@property (nonatomic, strong) NSNumber *tagCornerRadius;
+
+
 @end

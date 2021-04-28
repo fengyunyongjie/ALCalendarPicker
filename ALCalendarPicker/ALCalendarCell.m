@@ -19,6 +19,7 @@
 @interface ALCalendarCell()
 
 @property (nonatomic, strong) UILabel *dateLabel;
+@property (nonatomic, strong) UIView *tagView;
 
 @end
 
@@ -42,6 +43,14 @@
     [self.dateLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(weakSelf.mas_centerX);
         make.centerY.equalTo(weakSelf.mas_centerY);
+    }];
+    
+    [self addSubview:self.tagView];
+    [self.tagView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(weakSelf.mas_centerX);
+        make.bottom.equalTo(weakSelf.mas_bottom);
+        make.width.offset(8);
+        make.height.offset(8);
     }];
 }
 
@@ -75,5 +84,14 @@
     return _dateLabel;
 }
 
+
+- (UIView *)tagView {
+    if (!_tagView) {
+        _tagView = [[UIView alloc] init];
+        _tagView.backgroundColor = KDarkGrayColor;
+        _tagView.hidden=YES;
+    }
+    return _tagView;
+}
 
 @end
